@@ -27,6 +27,10 @@ Des routers sans-fils sont aussi disponibles sur demande si vous en avez besoin 
 
 __ATTENTION :__ Pour vos manipulations, il pourrait être important de bien fixer le canal lors de vos captures et/ou vos injections (à vous de déterminer si ceci est nécessaire pour les manipulations suivantes ou pas). Une méthode pour fixer le canal a déjà été proposée dans un laboratoire précédent.
 
+```
+airodump-ng --channel 6 wlan0mon
+```
+
 ## Quelques pistes utiles avant de commencer :
 
 - Si vous devez capturer et injecter du trafic, il faudra configurer votre interface 802.11 en mode monitor.
@@ -86,7 +90,7 @@ Le corps de la trame (Frame body) contient, entre autres, un champ de deux octet
 | 39 | Requested from peer QSTA due to timeout                                                                                                                                              |
 | 40 | Peer QSTA does not support the requested cipher suite                                                                                                                                              |
 | 46-65535 | Reserved                                                                                                                                              |
- 
+
 a) Utiliser la fonction de déauthentification de la suite aircrack, capturer les échanges et identifier le Reason code et son interpretation.
 
 __Question__ : quel code est utilisé par aircrack pour déauthentifier un client 802.11. Quelle est son interpretation ?
@@ -150,7 +154,7 @@ A des fins plus discutables du point de vue éthique, la détection de client s'
 ### 4. Probe Request Evil Twin Attack
 
 Nous allons nous intéresser dans cet exercice à la création d'un evil twin pour viser une cible que l'on découvre dynamiquement utilisant des probes.
- 
+
 Développer un script en Python/Scapy capable de detecter une STA cherchant un SSID particulier - proposer un evil twin si le SSID est trouvé (i.e. McDonalds, Starbucks, etc.).
 
 Pour la détection du SSID, vous devez utiliser Scapy. Pour proposer un evil twin, vous pouvez très probablement réutiliser du code des exercices précédents ou vous servir d'un outil existant.
