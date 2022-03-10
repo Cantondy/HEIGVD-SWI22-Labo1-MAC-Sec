@@ -93,7 +93,13 @@ Le corps de la trame (Frame body) contient, entre autres, un champ de deux octet
 
 a) Utiliser la fonction de déauthentification de la suite aircrack, capturer les échanges et identifier le Reason code et son interpretation.
 
-__Question__ : quel code est utilisé par aircrack pour déauthentifier un client 802.11. Quelle est son interpretation ?
+**Question : quel code est utilisé par aircrack pour déauthentifier un client 802.11. Quelle est son interpretation ?**
+
+Le code 7 est utilisé, ce code indique le message `Class 3 frame received from nonassociated station`, ce qui signifie que le client a essayé de transférer des données avant qu'il ne soit associé. 
+
+![](images/Q1.png)
+
+
 
 __Question__ : A l'aide d'un filtre d'affichage, essayer de trouver d'autres trames de déauthentification dans votre capture. Avez-vous en trouvé d'autres ? Si oui, quel code contient-elle et quelle est son interpretation ?
 
