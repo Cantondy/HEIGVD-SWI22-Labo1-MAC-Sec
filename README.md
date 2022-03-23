@@ -120,15 +120,43 @@ b) Développer un script en Python/Scapy capable de générer et envoyer des tra
 
 __Question__ : quels codes/raisons justifient l'envoie de la trame à la STA cible et pourquoi ?
 
-
+> *Code 1* : Ne spécifie pas la raison de l'envoi à la STA
+>
+> *Code 4* : Indique que la STA est inactive depuis un certain temps et qu'il faut donc la déconnecter
+>
+> *Code 5* : L'AP est surchargé est incapable de répondre aux tentatives de connexions supplémentaires
 
 __Question__ : quels codes/raisons justifient l'envoie de la trame à l'AP et pourquoi ?
 
+> Le *Code 1* car il ne spécifie pas la raison de l'envoi à l'AP
+>
+> Le *Code 8* car il indique à l'AP que la station quitte son BSS
+
 __Question__ : Comment essayer de déauthentifier toutes les STA ?
+
+> Si l'on utilise l'adresse MAC client `FF:FF:FF:FF:FF:FF` permettant de cibler toute les STA connectées à l'AP.
 
 __Question__ : Quelle est la différence entre le code 3 et le code 8 de la liste ?
 
+> Le *Code 3* défini que le client est désauthentifié et quitte donc l'ESS. Or, avec le *Code 8* le client va être désassocié du BSS par un AP.
+
 __Question__ : Expliquer l'effet de cette attaque sur la cible
+
+> Va déconnecter l'hôte cible de l'AP auquel il était connecté. Il ne sera pas possible de pouvoir accéder aux différentes ressources sur internet et il sera obligé de se reconnecter.
+
+**Description du script**
+
+>  Il est nécessaire de lancer la commande suivante avec les paramètres suivant :
+>
+>  ```bash
+>  sudo python3 script1_deauth.py -n <NB_DE_PAQUETS_A_ENVOYER> -a <BSSID_AP> -c >><CLIENT_MAC> -i <INTERFACE_SEND_ATTACK> -r <REASON_CODE>
+>  
+>  EXAMPLE:
+>  sudo python3 script1_deauth.py -i wlan0 -n 300 -a B8:D9:4D:80:8C:1C -c 20:79:18:B2:20:E6 -r 8
+>  ```
+>
+>  Trame Wireshark :
+>![](images/Q1-script.PNG)
 
 ### 2. Fake channel evil tween attack
 a)	Développer un script en Python/Scapy avec les fonctionnalités suivantes :
@@ -139,6 +167,12 @@ a)	Développer un script en Python/Scapy avec les fonctionnalités suivantes :
 * Générer un beacon concurrent annonçant un réseau sur un canal différent se trouvant à 6 canaux de séparation du réseau original
 
 __Question__ : Expliquer l'effet de cette attaque sur la cible
+
+>  La cible peut essayer de s’authentifier auprès de l’AP qui a été attaqué : la cible tentera de se connecter au "faux" AP, permettant ainsi de pouvoir récupérer ses credentials.
+
+**Fonctionnement du script**
+
+
 
 
 ### 3. SSID flood attack
