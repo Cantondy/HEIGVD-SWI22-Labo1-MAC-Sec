@@ -4,6 +4,10 @@
 
 __A faire en équipes de deux personnes__
 
+Auteurs : Dylan Canton & Christian Zaccaria
+
+Date : 23.03.2022
+
 
 1. [Deauthentication attack](#1-deauthentication-attack)
 2. [Fake channel evil tween attack](#2-fake-channel-evil-tween-attack)
@@ -13,8 +17,6 @@ __A faire en équipes de deux personnes__
 6. [Hidden SSID reveal](#6-hidden-ssid-reveal)
 7. [Livrables](#livrables)
 8. [Échéance](#%c3%89ch%c3%a9ance)
-
-
 
 ### Pour cette partie pratique, vous devez être capable de :
 
@@ -95,13 +97,19 @@ a) Utiliser la fonction de déauthentification de la suite aircrack, capturer le
 
 **Question : quel code est utilisé par aircrack pour déauthentifier un client 802.11. Quelle est son interpretation ?**
 
-Le code 7 est utilisé, ce code indique le message `Class 3 frame received from nonassociated station`, ce qui signifie que le client a essayé de transférer des données avant qu'il ne soit associé. 
+> Le code 7 est utilisé, ce code indique le message `Class 3 frame received from nonassociated station`, ce qui signifie que le client a essayé de transférer des données avant qu'il ne soit associé. 
+>
+>![](images/Q1.png)
+>
+> On peut constater sur *Wireshark* le resultat suivant (les adresses MAC ne sont pas similaire car la capture est faite dans un second temps) :
+>
+![](images/Q1-2.PNG)
 
-![](images/Q1.png)
-
-
-
-__Question__ : A l'aide d'un filtre d'affichage, essayer de trouver d'autres trames de déauthentification dans votre capture. Avez-vous en trouvé d'autres ? Si oui, quel code contient-elle et quelle est son interpretation ?
+__Question__ : A l'aide d'un filtre d'affichage, essayer de trouver d'autres trames de déauthentification dans votre capture. Avez-vous en trouvé d'autres ? Si oui, quel code contient-elle et quelle est son interprétation ?
+>```
+>wlan.fixed.reason_code != 0x0007
+>```
+> En utilisant le filtre ci-dessus, nous avons trouvé d'autres trames de déauthentification avec un reason code tel que le **6** : *Class 2 frame received from nonauthenticated station*
 
 b) Développer un script en Python/Scapy capable de générer et envoyer des trames de déauthentification. Le script donne le choix entre des Reason codes différents (liste ci-après) et doit pouvoir déduire si le message doit être envoyé à la STA ou à l'AP :
 
@@ -111,6 +119,8 @@ b) Développer un script en Python/Scapy capable de générer et envoyer des tra
 * 8 - Deauthenticated because sending STA is leaving BSS
 
 __Question__ : quels codes/raisons justifient l'envoie de la trame à la STA cible et pourquoi ?
+
+
 
 __Question__ : quels codes/raisons justifient l'envoie de la trame à l'AP et pourquoi ?
 
