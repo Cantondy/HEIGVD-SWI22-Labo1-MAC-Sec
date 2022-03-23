@@ -1,6 +1,7 @@
 # Auteurs    : Dylan Canton & Christian Zaccaria
 # Date       : 23.03.2022
-# Descriptif : Script permettant de deauthentifier une station connecté près d'un AP 
+# Descriptif : Script permettant de deauthentifier une station connecté près d'un AP
+# Entrée     : script1_deauth.py -n <NUMBER> -a <BSSID> -c <Client> -i <INTERFACE> -r <REASON_CODE>
 # Source     : https://github.com/catalyst256/MyJunk/blob/master/scapy-deauth.py
 
 from scapy.all import *

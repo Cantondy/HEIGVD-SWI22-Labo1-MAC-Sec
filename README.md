@@ -192,6 +192,23 @@ __Question__ : Expliquer l'effet de cette attaque sur la cible
 
 Développer un script en Python/Scapy capable d'inonder la salle avec des SSID dont le nom correspond à une liste contenue dans un fichier text fournit par un utilisateur. Si l'utilisateur ne possède pas une liste, il peut spécifier le nombre d'AP à générer. Dans ce cas, les SSID seront générés de manière aléatoire.
 
+> Il est nécessaire de lancer la commande suivante avec les paramètres suivant :
+>
+> ```bash
+> script3_ssidflood.py -i <INTERFACE_NAME> -f <TXT_FILENAME> ou <INT_NUMBER>
+> 
+> Exemple :
+> script3_ssidflood.py -i wlan0 -f names.txt
+> ou
+> script3_ssidflood.py -i wlan0 -f 5
+> ```
+>
+> Lors qu'on lance le script, il est possible de visualiser les noms des SSID qu'il a crée
+>
+> ![](images/Q3.PNG)
+
+
+
 
 ## Partie 2 - probes
 
