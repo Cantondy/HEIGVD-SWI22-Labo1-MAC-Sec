@@ -104,11 +104,14 @@ a) Utiliser la fonction de déauthentification de la suite aircrack, capturer le
 >
 ![](images/Q1-2.PNG)
 
-__Question__ : A l'aide d'un filtre d'affichage, essayer de trouver d'autres trames de déauthentification dans votre capture. Avez-vous en trouvé d'autres ? Si oui, quel code contient-elle et quelle est son interprétation ?
+**Question : A l'aide d'un filtre d'affichage, essayer de trouver d'autres trames de déauthentification dans votre capture. Avez-vous en trouvé d'autres ? Si oui, quel code contient-elle et quelle est son interprétation ?**
+
 >```
 >wlan.fixed.reason_code != 0x0007
 >```
 > En utilisant le filtre ci-dessus, nous avons trouvé d'autres trames de déauthentification avec un reason code tel que le **6** : *Class 2 frame received from nonauthenticated station*
+
+
 
 b) Développer un script en Python/Scapy capable de générer et envoyer des trames de déauthentification. Le script donne le choix entre des Reason codes différents (liste ci-après) et doit pouvoir déduire si le message doit être envoyé à la STA ou à l'AP :
 
@@ -165,7 +168,7 @@ a)	Développer un script en Python/Scapy avec les fonctionnalités suivantes :
 * Permettre à l'utilisateur de choisir le réseau à attaquer
 * Générer un beacon concurrent annonçant un réseau sur un canal différent se trouvant à 6 canaux de séparation du réseau original
 
-__Question__ : Expliquer l'effet de cette attaque sur la cible
+**Question : Expliquer l'effet de cette attaque sur la cible**
 
 >  La cible peut essayer de s’authentifier auprès de l’AP qui a été attaqué : la cible tentera de se connecter au "faux" AP, permettant ainsi de pouvoir récupérer ses credentials.
 
@@ -239,9 +242,11 @@ Développer un script en Python/Scapy capable de detecter une STA cherchant un S
 
 Pour la détection du SSID, vous devez utiliser Scapy. Pour proposer un evil twin, vous pouvez très probablement réutiliser du code des exercices précédents ou vous servir d'un outil existant.
 
-__Question__ : comment ça se fait que ces trames puissent être lues par tout le monde ? Ne serait-il pas plus judicieux de les chiffrer ?
+**Question : comment ça se fait que ces trames puissent être lues par tout le monde ? Ne serait-il pas plus judicieux de les chiffrer ?**
 
-__Question__ : pourquoi les dispositifs iOS et Android récents ne peuvent-ils plus être tracés avec cette méthode ?
+
+
+**Question : pourquoi les dispositifs iOS et Android récents ne peuvent-ils plus être tracés avec cette méthode ?**
 
 
 ### 5. Détection de clients et réseaux

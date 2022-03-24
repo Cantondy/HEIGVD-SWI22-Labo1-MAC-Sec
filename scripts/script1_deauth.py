@@ -23,7 +23,7 @@ conf.verb = 0
 if int(tab_args.Code) == 1 or 4 or 5:
     packet = RadioTap() / Dot11(type=0, subtype=12, addr1=tab_args.Client, addr2=tab_args.BSSID, addr3=tab_args.BSSID) / Dot11Deauth(reason=int(tab_args.Code))
 
-# Reason code envoyl par le client à l'AP    
+# Reason code envoyé par le client à l'AP    
 if int(tab_args.Code) == 8:
     packet = RadioTap() / Dot11(type=0, subtype=12, addr1=tab_args.BSSID, addr2=tab_args.Client, addr3=tab_args.Client) / Dot11Deauth(reason=int(tab_args.Code))
 

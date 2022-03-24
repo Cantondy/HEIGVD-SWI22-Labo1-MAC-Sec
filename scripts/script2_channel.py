@@ -35,7 +35,7 @@ def SSID_finder(pkt):
     if pkt.haslayer(Dot11Beacon):
         #type doit être 0 et subtype 8 obligatoirement
         if pkt.type == 0 and pkt.subtype == 8:
-            #check si on a déjà checker déjà le bssid (autrement on fait rien)
+            #check si on a déjà checker le bssid (autrement on fait rien)
             if pkt.getlayer(Dot11).addr2 not in bssid_list:
                 ssid = pkt.getlayer(Dot11Elt).info.decode("utf-8")
                 #check si pas un réseau caché
