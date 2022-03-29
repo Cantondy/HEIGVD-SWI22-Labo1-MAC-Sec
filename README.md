@@ -280,6 +280,23 @@ B8:17:C2:EB:8F:8F &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 08:EC:F5:28:1A:EF
 
 00:0E:35:C8:B8:66 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 08:EC:F5:28:1A:EF
 
+> Il est nécessaire de lancer la commande suivante avec les paramètres suivant :
+>
+> ```bash
+> script5_linkApSta.py -i <INTERFACE> 
+> 
+> Exemple :
+> script5_linkApSta.py -i wlan0
+> ```
+>
+> Lors qu'on lance le script, il est possible de visualiser les MAC des STA et des AP qui sont reliés entre eux
+>
+> ![](images/Q5-b2.PNG)
+>
+> On peut alors confirmer le résultat en exectuant un *airodump-ng* sur la même interface afin de visualiser le *BSSID* correspondant à la *STA*
+>
+> ![](images/Q5-b.PNG)
+
 
 ### 6. Hidden SSID reveal (exercices challenge optionnel - donne droit à un bonus)
 
