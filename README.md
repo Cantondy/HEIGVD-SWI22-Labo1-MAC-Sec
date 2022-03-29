@@ -146,7 +146,7 @@ __Question__ : Expliquer l'effet de cette attaque sur la cible
 
 > Va déconnecter l'hôte cible de l'AP auquel il était connecté. Il ne sera pas possible de pouvoir accéder aux différentes ressources sur internet et il sera obligé de se reconnecter.
 
-**Description du script**
+**Fonctionnement du script**
 
 >  Il est nécessaire de lancer la commande suivante avec les paramètres suivant :
 >
@@ -194,6 +194,8 @@ a)	Développer un script en Python/Scapy avec les fonctionnalités suivantes :
 ### 3. SSID flood attack
 
 Développer un script en Python/Scapy capable d'inonder la salle avec des SSID dont le nom correspond à une liste contenue dans un fichier text fournit par un utilisateur. Si l'utilisateur ne possède pas une liste, il peut spécifier le nombre d'AP à générer. Dans ce cas, les SSID seront générés de manière aléatoire.
+
+**Fonctionnement du script**
 
 > Il est nécessaire de lancer la commande suivante avec les paramètres suivant :
 >
@@ -253,6 +255,8 @@ Pour la détection du SSID, vous devez utiliser Scapy. Pour proposer un evil twi
 
 a) Développer un script en Python/Scapy capable de lister toutes les STA qui cherchent activement un SSID donné
 
+**Fonctionnement du script**
+
 > Il est nécessaire de lancer la commande suivante avec les paramètres suivant :
 >
 > ```bash
@@ -280,6 +284,8 @@ B8:17:C2:EB:8F:8F &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 08:EC:F5:28:1A:EF
 
 00:0E:35:C8:B8:66 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 08:EC:F5:28:1A:EF
 
+**Fonctionnement du script**
+
 > Il est nécessaire de lancer la commande suivante avec les paramètres suivant :
 >
 > ```bash
@@ -304,7 +310,30 @@ Développer un script en Python/Scapy capable de reveler le SSID correspondant �
 
 __Question__ : expliquer en quelques mots la solution que vous avez trouvée pour ce problème ?
 
+> On a procéder la manière suivante pour trouver une solution :
+>
+> - Chaque paquet "Beacon" est analysé afin de pouvoir extraire les *BSSID* des paquets sans *SSID*
+> - Au même temps, chaque paquet *Probe Response* est analysé afin de récupérer les *SSID* dont le *BSSID* correspond au *BSSID* des paquets "Beacon"
 
+**Fonctionnement du script**
+
+> Il est nécessaire de lancer la commande suivante avec les paramètres suivant :
+>
+> ```bash
+> script6_hiddenSsid.py -i <INTERFACE> 
+> 
+> Exemple :
+> script6_hiddenSsid.py -i wlan0
+> ```
+>
+> Voici un petit scénario afin de prouver le bon fonctionnement :
+>
+> On a en premier lancer le script ayant un AP ayant un SSID caché. On constate bien qu'il trouve le *BSSID* mais qu'il arrive pas trouver le *SSID* (en rouge dans la capture)
+>
+> Ensuite, on relance le script et pendant l'analyse de ce dernier, on s'est connecté sur l'AP "caché". Le résultat est que l'on va trouvé le *SSID* car un échange de *Probe Request/Response* à eu lieu (encadré vert).
+>
+> ![](images/Q6.PNG)
+>
 
 ## Livrables
 

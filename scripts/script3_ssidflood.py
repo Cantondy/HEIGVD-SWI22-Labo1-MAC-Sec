@@ -13,7 +13,6 @@
 from scapy.all import *
 from threading import Thread
 from faker import Faker
-import sys
 import argparse
 
 ssid_list = []

@@ -8,7 +8,6 @@
 
 
 from scapy.all import *
-import argparse
 import texttable as text_t
 
 bssid_list = []
