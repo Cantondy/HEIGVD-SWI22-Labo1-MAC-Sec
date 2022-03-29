@@ -253,6 +253,23 @@ Pour la détection du SSID, vous devez utiliser Scapy. Pour proposer un evil twi
 
 a) Développer un script en Python/Scapy capable de lister toutes les STA qui cherchent activement un SSID donné
 
+> Il est nécessaire de lancer la commande suivante avec les paramètres suivant :
+>
+> ```bash
+> script5_listSta.py -i <INTERFACE> -s <SSID>
+> 
+> Exemple :
+> script5_listSta.py -i wlan0 -s Krikri-AP
+> ```
+>
+> Lors qu'on lance le script, il est possible de visualiser les MAC des STA qui ont effectué une *probe request* pour l'SSID donné
+>
+> ![](images/Q5-a.PNG)
+>
+> A l'aide de *Wireshark*, on a pu bien confirmé le résultat obtenu
+>
+> ![](images/Q5-a2.PNG)
+
 b) Développer un script en Python/Scapy capable de générer une liste d'AP visibles dans la salle et de STA détectés et déterminer quelle STA est associée à quel AP. Par exemple :
 
 STAs &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; APs
