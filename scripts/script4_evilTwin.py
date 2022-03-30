@@ -11,9 +11,9 @@ import argparse
 
 # Param nécessaire (à remplir) permettant de lancer le scan
 parser = argparse.ArgumentParser(prog="Scapy SSID finder", description="SSID scan in prob request")
-parser.add_argument("-n", "--NameSSID", required=True, help="Name of the SSID to find")
 parser.add_argument("-i", "--Interface", required=True, help="Interface to scan")
 tab_args = parser.parse_args()
+parser.add_argument("-s", "--SSID", required=True, help="Resarched SSID")
 
 # SSID à trouver
 target_ssid = tab_args.NameSSID
@@ -39,4 +39,4 @@ def evil_twin_attack():
 
 
 # On sniff le réseau sur l'interface choisie
-sniff(iface=interface_to_check, prn = find_ssid, timeout=30)
+sniff(iface=interface_to_check, prn=find_ssid, timeout=30)

@@ -246,9 +246,28 @@ Pour la détection du SSID, vous devez utiliser Scapy. Pour proposer un evil twi
 
 **Question : comment ça se fait que ces trames puissent être lues par tout le monde ? Ne serait-il pas plus judicieux de les chiffrer ?**
 
-
+> Les trames *Prob Request* doivent être en clair car elles sont utilisées par les clients pour la recherche active des réseaux. 
+>
+> Si les trames étaient chiffrées, il ne serait pas garantis que les APs interceptant ces trames puissent en déchiffrer le contenu et donc fournir une réponse avec une *Prob Response*.
 
 **Question : pourquoi les dispositifs iOS et Android récents ne peuvent-ils plus être tracés avec cette méthode ?**
+
+> Car les dispositifs récents utilisent désormais des adresses MAC aléatoires à la place d'adresses MAC fixes. Ce mécanisme permet de rendre plus difficile la traque de ces dispositifs puisqu'ils ne possèdent plus une adresse MAC fixe. 
+
+**Fonctionnement du script**
+
+> Il est nécessaire de lancer la commande suivante avec les paramètres suivant :
+>
+> ```bash
+> script4_evilTwin.py -i <INTERFACE> -s <SSID>
+> 
+> Exemple :
+> script4_evilTwin.py -i wlan0 -s DC-AP
+> ```
+>
+> 
+
+
 
 
 ### 5. Détection de clients et réseaux
@@ -308,7 +327,7 @@ B8:17:C2:EB:8F:8F &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 08:EC:F5:28:1A:EF
 
 Développer un script en Python/Scapy capable de reveler le SSID correspondant à un réseau configuré comme étant "invisible".
 
-__Question__ : expliquer en quelques mots la solution que vous avez trouvée pour ce problème ?
+**Question : expliquer en quelques mots la solution que vous avez trouvée pour ce problème ?**
 
 > On a procéder la manière suivante pour trouver une solution :
 >
@@ -328,9 +347,9 @@ __Question__ : expliquer en quelques mots la solution que vous avez trouvée pou
 >
 > Voici un petit scénario afin de prouver le bon fonctionnement :
 >
-> On a en premier lancer le script ayant un AP ayant un SSID caché. On constate bien qu'il trouve le *BSSID* mais qu'il arrive pas trouver le *SSID* (en rouge dans la capture)
+> On a en premier lancé le script en ayant un AP avec un SSID caché. On constate bien qu'il trouve le *BSSID* mais qu'il n'arrive pas trouver le *SSID* (en rouge dans la capture)
 >
-> Ensuite, on relance le script et pendant l'analyse de ce dernier, on s'est connecté sur l'AP "caché". Le résultat est que l'on va trouvé le *SSID* car un échange de *Probe Request/Response* à eu lieu (encadré vert).
+> Ensuite, on relance le script et pendant l'analyse de ce dernier, on s'est connecté sur l'AP "caché". Le résultat est que l'on va trouvé le *SSID* car un échange de *Probe Request/Response* a eu lieu (encadré vert).
 >
 > ![](images/Q6.PNG)
 >
