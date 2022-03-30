@@ -262,12 +262,16 @@ Pour la détection du SSID, vous devez utiliser Scapy. Pour proposer un evil twi
 > script4_evilTwin.py -i <INTERFACE> -s <SSID>
 > 
 > Exemple :
-> script4_evilTwin.py -i wlan0 -s DC-AP
+> script4_evilTwin.py -i wlan0 -s Pilon
 > ```
 >
-> 
-
-
+> Lorsque le script est lancé, il va essayer pendant 30 secondes de trouver l'SSID que on lui fourni en paramètre. Si il trouve le SSID, il va envoyer alors des paquets à l'infini, simulant ainsi l'existence d'un AP
+>
+> ![](images/Q4.PNG)
+>
+> On peut voir le résultat suivant sur Wireshark lorsqu'on le SSID est trouvé :
+>
+> ![](images/Q4-w.PNG)
 
 
 ### 5. Détection de clients et réseaux
