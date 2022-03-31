@@ -99,7 +99,7 @@ a) Utiliser la fonction de déauthentification de la suite aircrack, capturer le
 
 > Le code 7 est utilisé, ce code indique le message `Class 3 frame received from nonassociated station`, ce qui signifie que le client a essayé de transférer des données avant qu'il ne soit associé. 
 >
->![](images/Q1.png)
+>![](images/Q1.PNG)
 > On peut constater sur *Wireshark* le résultat suivant (les adresses MAC ne sont pas similaires car la capture est faite dans un second temps) :
 >
 ![](images/Q1-2.PNG)
