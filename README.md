@@ -151,10 +151,10 @@ b) Développer un script en Python/Scapy capable de générer et envoyer des tra
 >  Il est nécessaire de lancer la commande suivante avec les paramètres suivant :
 >
 >  ```bash
->  sudo python3 script1_deauth.py -n <NB_DE_PAQUETS_A_ENVOYER> -a <BSSID_AP> -c >><CLIENT_MAC> -i <INTERFACE_SEND_ATTACK> -r <REASON_CODE>
+>  sudo python3 script1_deauth.py -n <NB_DE_PAQUETS_A_ENVOYER> -a <BSSID_AP> -c <CLIENT_MAC> -i <INTERFACE_SEND_ATTACK> -r <REASON_CODE>
 >  
 >  EXAMPLE:
->  sudo python3 script1_deauth.py -i wlan0 -n 300 -a B8:D9:4D:80:8C:1C -c 20:79:18:B2:20:E6 -r 8
+>  sudo python3 script1_deauth.py -n 300 -a B8:D9:4D:80:8C:1C -c 20:79:18:B2:20:E6 -i wlan0 -r 8
 >  ```
 >
 >  Trame Wireshark :
