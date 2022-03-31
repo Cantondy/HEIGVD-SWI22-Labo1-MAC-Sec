@@ -100,7 +100,7 @@ a) Utiliser la fonction de déauthentification de la suite aircrack, capturer le
 > Le code 7 est utilisé, ce code indique le message `Class 3 frame received from nonassociated station`, ce qui signifie que le client a essayé de transférer des données avant qu'il ne soit associé. 
 >
 >![](images/Q1.png)
-> On peut constater sur *Wireshark* le resultat suivant (les adresses MAC ne sont pas similaire car la capture est faite dans un second temps) :
+> On peut constater sur *Wireshark* le résultat suivant (les adresses MAC ne sont pas similaires car la capture est faite dans un second temps) :
 >
 ![](images/Q1-2.PNG)
 
@@ -120,29 +120,29 @@ b) Développer un script en Python/Scapy capable de générer et envoyer des tra
 * 5 - Disassociated because AP is unable to handle all currently associated stations
 * 8 - Deauthenticated because sending STA is leaving BSS
 
-__Question__ : quels codes/raisons justifient l'envoie de la trame à la STA cible et pourquoi ?
+**Question : quels codes/raisons justifient l'envoie de la trame à la STA cible et pourquoi ?**
 
 > *Code 1* : Ne spécifie pas la raison de l'envoi à la STA
 >
 > *Code 4* : Indique que la STA est inactive depuis un certain temps et qu'il faut donc la déconnecter
 >
-> *Code 5* : L'AP est surchargé est incapable de répondre aux tentatives de connexions supplémentaires
+> *Code 5* : L'AP est surchargé et incapable de répondre aux tentatives de connexions supplémentaires
 
-__Question__ : quels codes/raisons justifient l'envoie de la trame à l'AP et pourquoi ?
+**Question : quels codes/raisons justifient l'envoie de la trame à l'AP et pourquoi ?**
 
-> Le *Code 1* car il ne spécifie pas la raison de l'envoi à l'AP
+> Le *Code 1* car il ne spécifie pas la raison de l'envoi à l'AP.
 >
-> Le *Code 8* car il indique à l'AP que la station quitte son BSS
+> Le *Code 8* car il indique à l'AP que la station quitte son BSS.
 
-__Question__ : Comment essayer de déauthentifier toutes les STA ?
+**Question : Comment essayer de déauthentifier toutes les STA ?**
 
 > Si l'on utilise l'adresse MAC client `FF:FF:FF:FF:FF:FF` permettant de cibler toute les STA connectées à l'AP.
 
-__Question__ : Quelle est la différence entre le code 3 et le code 8 de la liste ?
+**Question : Quelle est la différence entre le code 3 et le code 8 de la liste ?**
 
 > Le *Code 3* défini que le client est désauthentifié et quitte donc l'ESS. Or, avec le *Code 8* le client va être désassocié du BSS par un AP.
 
-__Question__ : Expliquer l'effet de cette attaque sur la cible
+**Question : Expliquer l'effet de cette attaque sur la cible**
 
 > Va déconnecter l'hôte cible de l'AP auquel il était connecté. Il ne sera pas possible de pouvoir accéder aux différentes ressources sur internet et il sera obligé de se reconnecter.
 
@@ -176,17 +176,17 @@ a)	Développer un script en Python/Scapy avec les fonctionnalités suivantes :
 
 > Lancement du script sans paramètres supplémentaires.
 >
-> Il faut ensuite définir l'interface à écouter et ensuite le numéro (défini dans une liste) du réseau que l'on souhaite changer de canal
+> Il faut ensuite définir l'interface à écouter ainsi que le numéro (défini dans une liste) du réseau que l'on souhaite changer de canal
 >
 > ![](images/Q2-check.PNG)
 >
 > Nos résultats ont été confirmé à l'aide du capture Wireshark. On a alors essayé de changer le canal du réseau *Krikri-AP*.
 >
-> Lors de la première capture, on a vu que le canal était bien le **1**
+> Lors de la première capture, on a vu que le canal était bien le **1** :
 >
 > ![](images/Q2-beforechange.PNG)
 >
-> On a ensuite executé le script, et l'on a bien constaté que le canal à changé bien sur le **7**
+> On a ensuite executé le script, et l'on a bien constaté que le canal à changé bien sur le **7** :
 >
 > ![](images/Q2-afterchange.PNG)
 
@@ -208,7 +208,7 @@ Développer un script en Python/Scapy capable d'inonder la salle avec des SSID d
 > script3_ssidflood.py -i wlan0 -f 5
 > ```
 >
-> Lors qu'on lance le script, il est possible de visualiser les noms des SSID qu'il a crée
+> Lors qu'on lance le script, il est possible de visualiser les noms des SSID qu'il a crée :
 >
 > ![](images/Q3.PNG)
 
@@ -265,7 +265,7 @@ Pour la détection du SSID, vous devez utiliser Scapy. Pour proposer un evil twi
 > script4_evilTwin.py -i wlan0 -s Pilon
 > ```
 >
-> Lorsque le script est lancé, il va essayer pendant 30 secondes de trouver l'SSID que on lui fourni en paramètre. Si il trouve le SSID, il va envoyer alors des paquets à l'infini, simulant ainsi l'existence d'un AP
+> Lorsque le script est lancé, il va essayer pendant 30 secondes de trouver l'SSID que on lui fourni en paramètre. Si il trouve le SSID, il va envoyer alors des paquets à l'infini, simulant ainsi l'existence d'un AP :
 >
 > ![](images/Q4.PNG)
 >
@@ -289,7 +289,7 @@ a) Développer un script en Python/Scapy capable de lister toutes les STA qui ch
 > script5_listSta.py -i wlan0 -s Krikri-AP
 > ```
 >
-> Lors qu'on lance le script, il est possible de visualiser les MAC des STA qui ont effectué une *probe request* pour l'SSID donné
+> Lors qu'on lance le script, il est possible de visualiser les MAC des STA qui ont effectué une *probe request* pour l'SSID donné :
 >
 > ![](images/Q5-a.PNG)
 >
@@ -318,11 +318,11 @@ B8:17:C2:EB:8F:8F &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 08:EC:F5:28:1A:EF
 > script5_linkApSta.py -i wlan0
 > ```
 >
-> Lors qu'on lance le script, il est possible de visualiser les MAC des STA et des AP qui sont reliés entre eux
+> Lors qu'on lance le script, il est possible de visualiser les MAC des STA et des AP qui sont reliés entre eux :
 >
 > ![](images/Q5-b2.PNG)
 >
-> On peut alors confirmer le résultat en exectuant un *airodump-ng* sur la même interface afin de visualiser le *BSSID* correspondant à la *STA*
+> On peut alors confirmer le résultat en exectuant un *airodump-ng* sur la même interface afin de visualiser le *BSSID* correspondant à la *STA* :
 >
 > ![](images/Q5-b.PNG)
 
@@ -333,7 +333,7 @@ Développer un script en Python/Scapy capable de reveler le SSID correspondant �
 
 **Question : expliquer en quelques mots la solution que vous avez trouvée pour ce problème ?**
 
-> On a procéder la manière suivante pour trouver une solution :
+> On a procédé de la manière suivante pour trouver une solution :
 >
 > - Chaque paquet "Beacon" est analysé afin de pouvoir extraire les *BSSID* des paquets sans *SSID*
 > - Au même temps, chaque paquet *Probe Response* est analysé afin de récupérer les *SSID* dont le *BSSID* correspond au *BSSID* des paquets "Beacon"
